@@ -11,6 +11,7 @@ When a hand makes a stop sign gesture, the device captures an image, classifies 
 ## 🎥 Demo
 
 ![Demo GIF](demo.gif)
+
 [Youtube Demo Video](https://youtu.be/lrnlHX9MhXQ)
 ___
 
