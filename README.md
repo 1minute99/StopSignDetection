@@ -51,19 +51,20 @@ This project demonstrates a **full TinyML pipeline**:
 - **Custom Lightweight CNN** optimized for embedded devices  
 - Designed using **Depthwise Separable Convolutions** (MobileNet-style)  
 - **Architecture**:
-   Input (96x96x1)
-   ↓
-   DepthwiseConv2D (3x3) + Conv2D(1x1, 8ch)
-   ↓
-   MaxPooling2D (2x2)
-   ↓
-   DepthwiseConv2D (3x3) + Conv2D(1x1, 16ch)
-   ↓
-   MaxPooling2D (2x2)
-   ↓
-   Conv2D(1x1, 4ch)
-   ↓
+   Input (96x96x1) ->
+  
+   DepthwiseConv2D (3x3) + Conv2D(1x1, 8ch) ->
+  
+   MaxPooling2D (2x2) ->
+  
+   DepthwiseConv2D (3x3) + Conv2D(1x1, 16ch) ->
+  
+   MaxPooling2D (2x2) ->
+  
+   Conv2D(1x1, 4ch) ->
+  
    Flatten → Dense(2, softmax)
+  
 - **Parameters:** 4,928 (~19 KB)  
 - **Test Accuracy:** 96.5%  
 - **Inference Speed:** ~3.3 FPS on Arduino Nano 33 BLE
