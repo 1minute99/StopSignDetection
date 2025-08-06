@@ -8,6 +8,11 @@ When the user makes a hand gesture resembling a stop sign, the device captures a
 - **Red LED**: Stop sign not detected
 
 ---
+## 🎥 Demo
+
+![Demo Video](StopDetection_demo.mov)
+___
+
 
 ## 📂 Project Structure
 
