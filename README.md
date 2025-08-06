@@ -10,7 +10,7 @@ When the user makes a hand gesture resembling a stop sign, the device captures a
 ---
 ## 🎥 Demo
 
-![Demo Video](StopDetection_demo.mov)
+![Demo Video](demo.mp4)
 ___
 
 
