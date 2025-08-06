@@ -1,16 +1,17 @@
-# Stop Sign Detection on Embedded Device
+# 🛑 Stop Sign Detection (Embedded TinyML Project)
 
-This is an **end-to-end Stop Sign Detection** project using an **embedded device (Arduino Nano 33 BLE)**.  
-When the user makes a hand gesture resembling a stop sign, the device captures an image, runs a deep learning model for classification, and lights up an LED:
+End-to-end **Stop Sign Detection** project running on an **embedded device** (Arduino Nano 33 BLE + TinyML Shield).  
+When a hand makes a stop sign gesture, the device captures an image, classifies it using a **TinyML model**, and notifies the user via LED colors:
 
-- **Blue LED**: Capturing image  
-- **Green LED**: Stop sign detected  
-- **Red LED**: Stop sign not detected
+- 🔵 **Blue**: Image capturing  
+- 🟢 **Green**: Stop sign detected  
+- 🔴 **Red**: No stop sign detected  
 
 ---
 ## 🎥 Demo
 
-![Demo](demo.gif)
+![Demo GIF](demo.gif)
+![Demo Video](https://youtu.be/lrnlHX9MhXQ)
 ___
 
 
