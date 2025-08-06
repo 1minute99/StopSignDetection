@@ -1,84 +1,80 @@
 # 🛑 Stop Sign Detection (Embedded TinyML Project)
 
-End-to-end **Stop Sign Detection** project running on an **embedded device** (Arduino Nano 33 BLE + TinyML Shield).  
-When a hand makes a stop sign gesture, the device captures an image, classifies it using a **TinyML model**, and notifies the user via LED colors:
+An **end-to-end embedded AI project** for **real-time Stop Sign Detection** using **Arduino Nano 33 BLE + TinyML Shield**.  
+The device captures hand gesture images, runs **on-device deep learning inference**, and provides **LED feedback**:
 
-- 🔵 **Blue**: Image capturing  
+- 🔵 **Blue**: Capturing image  
 - 🟢 **Green**: Stop sign detected  
 - 🔴 **Red**: No stop sign detected  
 
+This project demonstrates **TinyML deployment**, from **custom data collection → model training → TFLite conversion → microcontroller inference**.
+
 ---
+
 ## 🎥 Demo
 
 ![Demo GIF](demo.gif)
 
-[Youtube Demo Video](https://youtu.be/lrnlHX9MhXQ)
-___
+🔗 [Watch Full Demo on YouTube](https://youtu.be/lrnlHX9MhXQ)
 
+---
+
+## 📸 Data Collection & Preprocessing
+
+1. **Hand Gesture Recording**  
+   - Collected **positive (Stop Sign)** and **negative (Other)** hand gesture videos  
+2. **Frame Extraction**  
+   - `recording_to_image.ipynb` converts videos to **96×96 grayscale images** at **5 FPS**  
+3. **Dataset**  
+   - Sample dataset uploaded for reference  
+   - Full dataset is private for **privacy reasons (face/hands visible)**
+
+---
+
+## 🧠 Model Overview
+
+- **Custom Lightweight CNN** optimized for embedded devices  
+- Designed using **Depthwise Separable Convolutions** (MobileNet-style)  
+- **Architecture**:
+     Input (96×96×1)
+   → DepthwiseConv2D
+   → Conv2D(8) + ReLU
+   → MaxPooling2D
+   → DepthwiseConv2D
+   → Conv2D(16) + ReLU
+   → MaxPooling2D
+   → Conv2D(4) + ReLU
+   → Flatten
+   → Dense(2, Softmax)
+- **Parameters:** 4,928 (~19 KB)  
+- **Test Accuracy:** 97.5%  
+- **Inference Speed:** ~3.3 FPS on Arduino Nano 33 BLE
+
+---
+
+## 🚀 Deployment Pipeline
+
+1. **Model Training & Quantization** (`main.ipynb`)  
+2. **Convert Keras → TFLite → C++ array (`model_data.cpp`)**  
+3. **Deploy to Arduino** via `inference_StopSignDetection`  
+   - Based on **TensorFlow Lite Micro Person Detection** example  
+   - Inference loop modified for **custom Stop Sign detection & LED feedback**
+
+---
 
 ## 📂 Project Structure
 
+```plaintext
 StopSignDetection/
-├── dataset/                       # Full dataset (not uploaded for privacy)
-│   └── samples/                   # Sample images for reference
+├── dataset/                        # Full dataset (not uploaded)
+│   └── samples/                    # Sample images for reference
 │
-├── inference_StopSignDetection/    # Inference code (modified from TF Person Detection)
-│   ├── model_data.cpp             # Converted TFLite model for inference
-│   └── main_functions.cpp         # Inference loop (LED control, model invoke)
+├── inference_StopSignDetection/     # Embedded inference code
+│   ├── model_data.cpp              # TFLite model as C++ array
+│   └── main_functions.cpp          # Inference loop (LED control, model invoke)
 │
-├── main.ipynb                     # Data preprocessing, model building, training, TFLite conversion
-├── recording_to_image.ipynb       # Extract frames from videos to images
+├── main.ipynb                      # Data preprocessing, model building, training, TFLite conversion
+├── recording_to_image.ipynb        # Extract frames from videos to images
 ├── requirements.txt
 ├── README.md
 └── .gitignore
-
-## 📸 Data Collection
-
-1. **Video Recording**  
-   - Recorded hand gestures for **Positive (Stop Sign)** and **Negative (Other)** samples  
-2. **Frame Extraction**  
-   - `recording_to_image.ipynb` converts videos into image datasets at **5 FPS**  
-3. **Dataset**  
-   - Input: **96×96 grayscale images**  
-   - Only sample data uploaded (full dataset is private for privacy reasons)
-
----
-
-## 🧠 Model
-
-- **Lightweight CNN** using Depthwise Convolutions
-- **Architecture:**  
-  Input (96x96x1) → DepthwiseConv2D → Conv2D → MaxPooling2D → DepthwiseConv2D → Conv2D → MaxPooling2D → Conv2D → Flatten → Dense(2)
-
----
-
-## 🚀 Deployment
-
-1. Train model → Convert to **TFLite** → Convert to **C++ array (.cc)**  
-2. Include `model_data.cpp` in `inference_StopSignDetection`  
-3. The inference code is based on **TensorFlow Lite Micro Person Detection** example  
-   - Apache 2.0 license maintained
-
----
-
-## ⚡ Hardware & Environment
-
-- **Arduino Nano 33 BLE + TinyML Shield**  
-- **Python 3.9**, TensorFlow 2.16, TFLite Micro  
-- MacOS + Arduino IDE 2.x
-
----
-
-## 📊 Performance
-
-- **Test Accuracy:** 97.5%  
-- **Inference Speed:** 3.3 FPS  
-- **LED feedback** indicates detection results in real-time
-
----
-
-## 📜 License
-
-- Base code from **TensorFlow Lite Micro (Apache 2.0 License)**
-- Modifications: Custom dataset, preprocessing, model architecture, etc
-- Custom dataset & model © 2025 Wonmin Kim
