@@ -12,6 +12,14 @@ This project demonstrates a **full TinyML pipeline**:
 
 ---
 
+## 🎥 Demo
+
+![Demo GIF](demo.gif)
+
+🔗 [Watch Full Demo on YouTube](https://youtu.be/lrnlHX9MhXQ)
+
+---
+
 ## 📌 Project Summary
 
 | Metric                        | Value                               |
@@ -23,14 +31,6 @@ This project demonstrates a **full TinyML pipeline**:
 | **Hardware**                   | Arduino Nano 33 BLE + TinyML Shield |
 | **Training Data**              | ~2,000 images (Positive/Negative)    |
 | **Dataset FPS**                | Extracted at 5 FPS from videos       |
-
----
-
-## 🎥 Demo
-
-![Demo GIF](demo.gif)
-
-🔗 [Watch Full Demo on YouTube](https://youtu.be/lrnlHX9MhXQ)
 
 ---
 
